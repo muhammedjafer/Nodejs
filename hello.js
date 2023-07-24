@@ -23,14 +23,39 @@
 
 // make http request in node.js
 
-const http = require('http');
+// const http = require('http');
 
-const req = http.request('http://www.google.com', (res) => {
-    res.on('data', (chunk) => {
-        console.log(`data chunk is a piece of data: ${chunk}`);
-        });
-    res.on('end', () => {console.log('no more data'); 
-    });
+// const req = http.request('http://www.google.com', (res) => {
+//     res.on('data', (chunk) => {
+//         console.log(`data chunk is a piece of data: ${chunk}`);
+//         });
+//     res.on('end', () => {console.log('no more data'); 
+//     });
+// });
+
+// req.end();
+
+const http = require('http');
+const url = require('url');
+
+// ? set up the server
+
+const server = http.createServer((req, res) => {
+    console.log(req.url);
+
+    const pathName = req.url;
+
+    if (pathName === '/overview')
+    {
+        res.end('this is the overview of the page you see here');
+    } 
+    else {
+        res.writeHead(404);
+        res.end('hello');
+    }
+
 });
 
-req.end();
+server.listen(8000, '127.0.0.1', () => {
+    console.log('hello world')
+});

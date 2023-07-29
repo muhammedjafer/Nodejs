@@ -46,7 +46,7 @@ mongoose
     console.error('Error connecting to MongoDB:', error);
   });
 
-
+app.use(bodyParser.json());
 app.use('/', routes);
 
 app.listen(PORT , ()=> console.log(`server start on port ${PORT}`))
